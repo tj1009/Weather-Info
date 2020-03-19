@@ -1,7 +1,0 @@
-index.html:40 Showing the name of group member in alert
-index.html:40 Initalizing the map
-index.html:56 gettting the location
-index.html:76 getting the weather information
-index.html:49 performing action on onclic of submit button
-index.html:103 data <p>Temperature - 2.86&deg;C</p><p>Description - overcast clouds</p><p>Humidity - 88</p>
-index.html:60 index.html:60 status OK
