@@ -1,29 +1,45 @@
 <!DOCTYPE html>
 <html>
   <head>
+
+<! –– title ––>
     <title>Weather Info</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
+
+    <! –– link to ajax script ––>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/styles.css" type="text/css">
   </head>
   <body>
 
+  <! –– map division––>
     <div id="map">
     </div>
+
+<! –– taking input address from user ––>
     <div class="input">
       <input id="address" type="text" placeholder="Enter the city" class="input_text">
       <input id="submit" type="submit" value="Submit" class="submit">
     </div>
+
+    <! –– Showing the weather information ––>
     <div class="container">
       <div class="card">
-        <h2>WEATHER INFORMATION</h2>
+        <h2>WEATHER INFROMATION</h2>
         <p align="center" id = "showMetheForecast" ></p>
       </div>
     </div>
 
   </div>
+
     <script type="text/javascript">
+      console.log("Showing the name of group member in alert");
+  alert("GROUP21: \n\nTUSHAR, TANYA, MANASA, PRANSHI \n\n Enter the city name and you can see the city on the map and weather and humidity of the city!!");
+
+
+    console.log("Initalizing the map");
+    //Initalizing the google map
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 8,
@@ -31,15 +47,20 @@
         });
         var geocoder = new google.maps.Geocoder();
 
+        console.log("performing action on onclic of submit button");
         document.getElementById('submit').addEventListener('click', function() {
           geocodeAddress(geocoder, map);
         });
       }
 
+      //getting the geo location
+      console.log("gettting the location");
       function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('address').value;
         geocoder.geocode({'address': address}, function(results, status) {
+          console.log("status",status);
           if (status === 'OK') {
+
             resultsMap.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
               map: resultsMap,
@@ -52,15 +73,17 @@
       }
 
 
-
+//getting the weather data from the api
+console.log("getting the weather information");
   $(document).ready(function(){
    $("#submit").click(function(){
+
 
         var city = $("#address").val();
         var key ='afc9a8f24679ffbf0b417d4538fd0b6a';
 
-        $.ajax({
 
+        $.ajax({
           url:'https://api.openweathermap.org/data/2.5/weather',
           dataType:'json',
           type:'GET',
@@ -68,6 +91,7 @@
 
             success:function(data){
                var wf='';
+
 
                $.each(data.weather, function(index,val){
                  wf += '<p>'+"Temperature - "+data.main.temp + '&deg;C' +"</p>" +
@@ -77,7 +101,7 @@
                });
 
               $("#showMetheForecast").html(wf);
-
+console.log("data",wf);
             }
 
 
